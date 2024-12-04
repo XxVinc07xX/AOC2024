@@ -14,6 +14,8 @@ map = lines.split("\n")
 
 #===============================HELPER FUNCTIONS=================================
 
+#PART1
+
 
 def limits_hori(y,map):
     if y+3 <= len(map[0])-1:
@@ -99,11 +101,50 @@ def check_diag_so(i,j,map):
         return True
     return False
 
+#PART2 : check every possibility from pt of view of A
+
+#M-S
+#-A-
+#M-S
+
+def check_pattern(i,j,map):
+    if map[i-1][j-1] == "M" and map[i-1][j+1] == "S" and map[i+1][j+1] == "S" and map[i+1][j-1] == "M":
+        return True
+    return False
+
+#S-M
+#-A-
+#S-M
+
+def check_pattern_back(i,j,map):
+    if map[i-1][j-1] == "S" and map[i-1][j+1] == "M" and map[i+1][j+1] == "M" and map[i+1][j-1] == "S":
+        return True
+    return False
+
+
+#M-M
+#-A-
+#S-S
+
+def check_pattern_flip_down(i,j,map):
+    if map[i-1][j-1] == "M" and map[i-1][j+1] == "M" and map[i+1][j+1] == "S" and map[i+1][j-1] == "S":
+        return True
+    return False
+
+
+#S-S
+#-A-
+#M-M
+
+def check_pattern_flip_up(i,j,map):
+    if map[i-1][j-1] == "S" and map[i-1][j+1] == "S" and map[i+1][j+1] == "M" and map[i+1][j-1] == "M":
+        return True
+    return False
+
 
 #===============================BODY=================================
 
-print(len(map[0]))
-print(len(map))
+#PART1 
 
 sum = 0
 
@@ -137,3 +178,23 @@ for i in range(len(map)):
                     sum += 1
 
 print(sum)
+
+#PART2
+
+sum_pt2 = 0
+
+
+for i in range(1,len(map)-1):
+    for j in range(1,len(map[0])-1):
+        #print(map[i][j], (i,j))
+        if map[i][j] == "A":
+            if check_pattern(i,j,map):
+                sum_pt2 += 1
+            if check_pattern_flip_down(i,j,map):
+                sum_pt2 += 1
+            if check_pattern_flip_up(i,j,map):
+                sum_pt2 += 1
+            if check_pattern_back(i,j,map):
+                sum_pt2 += 1
+
+print(sum_pt2)
