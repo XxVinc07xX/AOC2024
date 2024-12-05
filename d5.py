@@ -28,7 +28,11 @@ for i in range(list_idx+1, len(lines)):
             if int(cur_line[k]) in dict.keys():
                 if int(cur_line[j]) in dict[int(cur_line[k])]:
                     correct = 0
-    if correct == 1:
+                    cur_line[j], cur_line[k] = cur_line[k], cur_line[j]
+    if correct == 0:
         sum += int(cur_line[len(cur_line)//2])
+    if correct == 1:
+        #sum += int(cur_line[len(cur_line)//2])
+        pass #PART1
 
 print(sum)
