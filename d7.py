@@ -1,7 +1,7 @@
 from itertools import product
 
 def all_operators(n):
-    items = ["+","*"]
+    items = ["+","*","||"]
     out = []
     for item in product(items, repeat=n):
         l = []
@@ -30,6 +30,12 @@ def mul_with_op(line, op):
             out += line[i+1]
         elif op[i] == "*":
             out *= line[i+1]
+        elif op[i] == "||":
+            inter_out = str(out)
+            inter_i = str(line[i+1])
+            inter = inter_out+inter_i
+            out = int(inter)
+
     return out
 
 
@@ -42,6 +48,7 @@ output = 0
 
 for line in lines:
     line = line.split(": ")
+    print(line)
     value = line[0]
     equation = list(map(int,line[1].split(" ")))
     length = len(equation)
