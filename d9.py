@@ -13,7 +13,28 @@ def is_first_dig(l):
                 last_dig = i
     return True
 
-            
+def find_block_size(l,i):
+    size = 0
+    value = l[i]
+    idx = i
+    while(l[idx] == value and idx >= 0):
+        size += 1
+        idx -= 1
+    return size
+
+def find_space(l,n):
+    for i in range(len(l)-n+1):
+        found = True
+        for j in range(n):
+            if l[i+j] != ".":
+                found = False
+                break
+        if found:
+            return i
+    return None
+
+
+
 
 
 
@@ -44,14 +65,24 @@ print("1 done")
 #l_first_out = list(first_out)
 
 #print(len(l_first_out), "len")
-for i in range(len(l_first_out)-1,-1,-1):
-    first_pt = first_missing(l_first_out)
-    #print(first_pt)
-    if first_pt != None and not is_first_dig(l_first_out):
-        l_first_out[first_pt], l_first_out[i] = l_first_out[i], l_first_out[first_pt]
-        #print(l_first_out)
+i = len(l_first_out)-1
+while i>=0:
+    if l_first_out[i] != ".":
+        #print(i)
+        #print(l_first_out[i])
+        nb = find_block_size(l_first_out, i)
+        space = find_space(l_first_out,nb)
+        if space != None and space < i-nb:
+            #print("free index for " + str(nb) + " blocs at index "+ str(space))
+            #print(nb, space)
+            for j in range(nb):
+                l_first_out[space+j], l_first_out[i-j] = l_first_out[i-j], l_first_out[space+j]
+        i -= nb
     else:
-        break
+        i -= 1
+    #print(l_first_out)
+
+#print(l_first_out)
 
 
 
