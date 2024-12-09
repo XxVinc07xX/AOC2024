@@ -17,69 +17,213 @@ def find_occurence(i,j,map):
                 if map[x][y] == value:
                     diff_i = abs(i-x)
                     diff_j = abs(j-y)
+
+                    if (x,y) not in out:
+                        out.append((x,y))
+
+                    #while in map dir:
+                    #   if dir not in out:
+                    #       out.append(dir)
+
                     if i < x and j > y:
-                        if in_map(i-diff_i, j+diff_j, map):
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(i-diff_i, j+diff_j, map):
                             if (i-diff_i, j+diff_j) not in out:
                                 out.append((i-diff_i, j+diff_j))
-                        if in_map(x+diff_i, y-diff_j, map):
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
+                        
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(x+diff_i, y-diff_j, map):
                             if (x+diff_i, y-diff_j) not in out:
                                 out.append((x+diff_i, y-diff_j))
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
 
                     elif i < x and j < y:
-                        if in_map(i-diff_i, j-diff_j, map):
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(i-diff_i, j-diff_j, map):
                             if (i-diff_i, j-diff_j) not in out:
                                 out.append((i-diff_i, j-diff_j))
-                        if in_map(x+diff_i, y+diff_j, map):
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
+                        
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(x+diff_i, y+diff_j, map):
                             if (x+diff_i, y+diff_j) not in out:
                                 out.append((x+diff_i, y+diff_j))
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
 
                     elif i > x and j > y:
-                        if in_map(i+diff_i, j+diff_j, map):
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(i+diff_i, j+diff_j, map):
                             if (i+diff_i, j+diff_j) not in out:
                                 out.append((i+diff_i, j+diff_j))
-                        if in_map(x-diff_i, y-diff_j, map):
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
+
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(x-diff_i, y-diff_j, map):
                             if (x-diff_i, y-diff_j) not in out:
                                 out.append((x-diff_i, y-diff_j))
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
 
                     elif i > x and j < y:
-                        if in_map(i+diff_i, j-diff_j, map):
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(i+diff_i, j-diff_j, map):
                             if (i+diff_i, j-diff_j) not in out:
                                 out.append((i+diff_i, j-diff_j))
-                        if in_map(x-diff_i, y+diff_j, map):
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
+
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(x-diff_i, y+diff_j, map):
                             if (x-diff_i, y+diff_j) not in out:
                                 out.append((x-diff_i, y+diff_j))
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
 
                     elif i == x and j < y:
-                        if in_map(i, j-diff_j, map):
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(i, j-diff_j, map):
                             if (i, j-diff_j) not in out:
                                 out.append((i, j-diff_j))
-                        if in_map(x, y+diff_j, map):
+                                inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
+
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(x, y+diff_j, map):
                             if (x, y+diff_j) not in out:
                                 out.append((x, y+diff_j))
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
 
                     elif i == x and j > y:
-                        if in_map(i, j+diff_j, map):
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(i, j+diff_j, map):
                             if (i, j+diff_j) not in out:
                                 out.append((i, j+diff_j))
-                        if in_map(x, y-diff_j, map):
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
+
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(x, y-diff_j, map):
                             if (x, y-diff_j) not in out:
                                 out.append((x, y-diff_j))
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
 
                     elif i > x and j == y:
-                        if in_map(i+diff_i, j, map):
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(i+diff_i, j, map):
                             if (i+diff_i, j) not in out:
                                 out.append((i+diff_i, j))
-                        if in_map(x-diff_i, y, map):
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
+
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(x-diff_i, y, map):
                             if (x-diff_i, y) not in out:
                                 out.append((x-diff_i, y))
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
 
                     elif i < x and j == y:
-                        if in_map(i-diff_i, j, map):
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(i-diff_i, j, map):
                             if (i-diff_i, j) not in out:
                                 out.append((i-diff_i, j))
-                        if in_map(x+diff_i, y, map):
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
+
+                        inc_i = 1
+                        inc_j = 1
+                        init_diff_i = diff_i
+                        init_diff_j = diff_j
+                        while in_map(x+diff_i, y, map):
                             if (x+diff_i, y) not in map:
                                 out.append((x+diff_i, y))
+                            inc_i += 1
+                            inc_j += 1
+                            diff_i = init_diff_i * inc_i
+                            diff_j = init_diff_j * inc_j
     return out
 
 
