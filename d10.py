@@ -36,13 +36,11 @@ def path(map,i,j):
 
 
 
-trailheads = []
 score = 0
 
 for i in range(len(map)):
     for j in range(len(map[0])):
         if map[i][j] == "0":
-            trailheads.append((i,j))
             score += path(map,i,j)
 
 print(score)
