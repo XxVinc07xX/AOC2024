@@ -24,8 +24,7 @@ def path(map,i,j):
 
             if in_map(x, y, map) :
                 if map[x][y] == str(int(value) +1):
-                    if str(map[x][y]) == "9" and (x,y) not in visited:
-                        visited.append((x,y))
+                    if str(map[x][y]) == "9":
                         score += 1
                     else:
                         q.append((x,y))
