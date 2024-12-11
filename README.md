@@ -2,7 +2,7 @@
 
 ## Content
 
-This repo contains all my soltions for the 2024 AOC
+This repo contains all my solutions for the 2024 AOC
 
 ## Author
 
