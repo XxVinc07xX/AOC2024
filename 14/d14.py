@@ -6,13 +6,7 @@ lines = input.readlines()
 map_x = 103
 map_y = 101
 
-def second_behavior(p,v,map_x,map_y,iter=0):
-    if iter == 100:
-        return (p[0],p[1])
-    new_pos = ((p[0]+v[0])%map_x, (p[1]+v[1])%map_y)
-    return second_behavior(new_pos,v,map_x,map_y,iter= iter+1)
-
-final_pos = []
+cur_pos = []
 
 for line in lines:
     line = re.sub(r'^p=', '', line)
@@ -25,39 +19,40 @@ for line in lines:
     v.reverse()
 
     #print(p,v)
+    cur_pos.append((p,v))
 
-    final_pos.append(second_behavior(p,v,map_x,map_y))
+#print(cur_pos)
+for test in range(1,1000000): #start at 1 bc idx 0 is the 1st second 
+    breaked = False
+    #print(test)
+    new_list = []
+    for pos in range(len(cur_pos)):
+        item = cur_pos[pos]
+        old_p = item[0]
+        cur_v = item[1]
+        new_p = ((old_p[0]+cur_v[0])%map_x, (old_p[1]+cur_v[1])%map_y)
+        new_list.append((new_p,cur_v))
+    cur_pos = new_list
 
-final_pos.sort()
+    new_map = []
+    for _ in range(map_x):
+        new_map.append([0]*map_y)
 
-new_map = []
-for i in range(map_x):
-    new_map.append([0]*map_y)
+    for i in range(len(cur_pos)):
+        pos = cur_pos[i]
+        x, y = pos[0]
+        new_map[x][y] += 1
 
-for i in range(len(final_pos)):
-    pos = final_pos[i]
-    new_map[pos[0]][pos[1]] += 1
 
-q1 = 0
-q2 = 0
-q3 = 0
-q4 = 0
+    for i in range(map_x):
+        for j in range(map_y):
+            if new_map[i][j] > 1:
+                breaked = True
+                break
+        if breaked:
+            break
 
-for i in range(0,map_x//2):
-    for j in range(0, map_y//2):
-        q1 += new_map[i][j]
-
-for i in range(0, map_x//2):
-    for j in range(map_y//2+1, map_y):
-        q2 += new_map[i][j]
-
-for i in range(map_x//2 +1 , map_x):
-    for j in range(0, map_y//2):
-        q3 += new_map[i][j]
-
-for i in range(map_x//2 +1, map_x):
-    for j in range(map_y//2 +1, map_y):
-        q4 += new_map[i][j]
-
-print(q1* q2* q3* q4)
+    if not breaked:
+        print(test)
+        break
 
