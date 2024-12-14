@@ -40,8 +40,7 @@ for test in range(1,1000000): #start at 1 bc idx 0 is the 1st second
 
     for i in range(len(cur_pos)):
         pos = cur_pos[i]
-        x, y = pos[0]
-        new_map[x][y] += 1
+        new_map[pos[0][0]][pos[0][1]] += 1
 
 
     for i in range(map_x):
