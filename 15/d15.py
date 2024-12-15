@@ -81,12 +81,10 @@ def nb_O(i,j,map,dir):
             if map[k][j] == "O":
                 nb += 1
     elif dir == "v":
-        print(i,j,"ij")
         for k in range(i, len(map)):
             if map[k][j] == "#":
                 return nb
             if map[k][j] == "O":
-                print(k,j, "nb_O")
                 nb += 1
     elif dir == "<":
         for k in range(j,0,-1):
