@@ -124,14 +124,14 @@ def next_dot(i,j,map,dir):
 
 
 map = []
-for i in range(7):
+for i in range(50):
     map.append(lines[i].strip())
 
 
 #print(map)
 
 instr = ""
-for i in range(8, len(lines)):
+for i in range(51, len(lines)):
     instr += lines[i].strip() #skip \n
 
 print(instr)
@@ -166,19 +166,3 @@ for i in range(len(map)):
             score += 100*i + j
 
 print(score)
-
-#PART2
-
-new_map = []
-for i in range(len(map)):
-    new_map_i = ""
-    for j in range(len(map[0])):
-        if map[i][j] == "#":
-            new_map_i += "##"
-        elif map[i][j] == "O":
-            new_map_i += "[]"
-        elif map[i][j] == ".":
-            new_map_i += ".."
-        elif map[i][j] == "@":
-            new_map_i += "@."
-    new_map.append(new_map_i)
