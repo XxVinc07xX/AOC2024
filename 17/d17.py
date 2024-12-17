@@ -15,11 +15,9 @@ def combo_operand(reg_A, reg_B, reg_C, operand):
 
 def behavior(instr_ptr, opcode, operand, reg_A, reg_B, reg_C, prog_limit, out):
     if opcode == 0:
-        #print("here")
         operand = combo_operand(reg_A=reg_A, reg_B=reg_B, reg_C=reg_C, operand=operand)
         reg_A = int(reg_A/(2**operand))
         instr_ptr += 2
-        #print(operand, reg_A, instr_ptr)
         return (instr_ptr, reg_A, reg_B, reg_C, out)
     elif opcode == 1:
         reg_B = reg_B ^ operand
@@ -71,14 +69,11 @@ reg_C = int(lines[2].split(":")[1])
 
 prog = lines[4].split(": ")[1]
 prog = list(prog.replace(',',''))
-prog_limit = len(prog)-2 #-2 to place to the opcode
+prog_limit = len(prog)-2 #-2 to place instr_ptr on the opcode
 
 instr_ptr = 0
 
 while (instr_ptr != None):
-    #print(int(prog[instr_ptr]))
-    #print(int(prog[instr_ptr+1]))
-    #print(reg_A, reg_B, reg_C)
     res = behavior(instr_ptr,opcode=int(prog[instr_ptr]),operand=int(prog[instr_ptr+1]),reg_A=reg_A,reg_B=reg_B, reg_C=reg_C,prog_limit=prog_limit, out=out)
     if res != None:
         instr_ptr = res[0]
