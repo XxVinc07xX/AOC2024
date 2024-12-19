@@ -9,22 +9,21 @@ count = 0
 designs = lines[2:]
 
 def can_form_string(target, patterns_dic, memo):
-    if target in memo:  # Return cached result
+    if target in memo: 
         return memo[target]
-    if target == '': 
-        return True
+    if target == '': #base case
+        return 1
+    
+    count = 0 
     
     for pattern, max_count in patterns_dic.items():
         if max_count > 0 and target.startswith(pattern):
-            # Use the pattern, reducing its count
             patterns_dic[pattern] -= 1
-            if can_form_string(target[len(pattern):], patterns_dic, memo):
-                memo[target] = True
-                return True
-            patterns_dic[pattern] += 1  # Backtrack if it didn't work
+            count += can_form_string(target[len(pattern):], patterns_dic, memo)
+            patterns_dic[pattern] += 1  # Backtrack and restore the count
     
-    memo[target] = False  #keep track that it did not work
-    return False
+    memo[target] = count #cache res
+    return count
 
 
 for i in range(len(designs)):
@@ -35,8 +34,8 @@ for i in range(len(designs)):
     
     # Use memoization https://www.geeksforgeeks.org/what-is-memoization-a-complete-tutorial/
     memo = {}
-    if can_form_string(line, patterns_dic, memo):
-        count += 1
+    res = can_form_string(line, patterns_dic, memo)
+    count += res
 
 print(count)
 
