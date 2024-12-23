@@ -29,6 +29,14 @@ def count_t(lst):
             out += 1
     return out
 
+def BronKerbosch(R,P,X): #https://fr.wikipedia.org/wiki/Algorithme_de_Bron-Kerbosch
+    if len(P) == 0 and len(X) == 0:
+        complete_graphs.append(R)
+    for sommet in list(P):
+        BronKerbosch(R | {sommet}, P & dic[sommet], X & dic[sommet])
+        P.remove(sommet)
+        X.add(sommet)
+
 
 
 
@@ -41,45 +49,23 @@ for line in lines:
     tuple_line = (line[0], line[1])
     #print(tuple_line)
     if line[0] not in dic:
-        dic[line[0]] = []
+        dic[line[0]] = set()
 
     if line[1] not in dic:
-        dic[line[1]] = []
+        dic[line[1]] = set()
     
-    if (line[0], line[1]) not in dic[line[0]] or (line[1], line[0]) not in dic[line[0]]:
-        dic[line[0]].append(tuple_line)
+    if line[1] not in dic[line[0]]:
+        dic[line[0]].add(line[1])
     
-    if  (line[0], line[1]) not in dic[line[1]] or (line[1], line[0]) not in dic[line[1]]:
-        dic[line[1]].append(tuple_line)
+    if  line[0] not in dic[line[1]]:
+        dic[line[1]].add(line[0])
 
 #print(dic)
 
-triple = []
+complete_graphs = []
 
-for key, value in dic.items():
-    print(key)
-    if len(value) >= 2:
-        for i in range(len(value)):
-            for j in range(len(value)):
-                if i != j:
-                    if check(value[i], value[j], dic, key):
-                        if value[i][0] == key:
-                            new_val1 = value[i][1]
-                        else:
-                            new_val1 = value[i][0]
-                        if value[j][0] == key:
-                            new_val2 = value[j][1]
-                        else:
-                            new_val2 = value[j][0]
-                        triple_tuple = (key, new_val1, new_val2)
-                        if not present_in_triple(triple, triple_tuple):
-                            triple.append(triple_tuple)
-     
+BronKerbosch(set(), set(dic.keys()),set())
 
-for line in triple:
-    print(line)
 
-print(len(triple))
-                   
-
-print(count_t(triple))
+maxConnection = max(complete_graphs, key=len)
+print(sorted(maxConnection))
